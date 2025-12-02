@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+dataclasses/
+state_dfs/
+outputs/
+*.bin
+*.h5
+*.dat

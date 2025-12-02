@@ -1,0 +1,9 @@
+suite2p
+facemap
+matplotlib
+numpy
+pandas
+scipy
+statsmodels
+pyarrow (if errors try uninstalling and reinstalling)
+if you have GPU: cupy

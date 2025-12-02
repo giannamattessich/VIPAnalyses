@@ -1,0 +1,47 @@
+
+# have matlab 2025 installed, 
+in python virtual env -> python -m pip install matlabengine
+
+
+LINUX 
+    (for more reference: https://pypi.org/project/matlabengine/)
+
+USUAL MATLAB ROOT -> /usr/local/MATLAB/R2025b or /usr/local/MATLAB/(version 2025+) (replace from <matlabroot>)
+
+nano ~/.bashrc
+add:
+    export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<matlabroot>/bin/glnxa64
+save
+
+nano ~/.tcshrc
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:<matlabroot>/bin/glnxa64
+
+OR IF YOU ONLY WANT INSTALL IN VIRTUAL ENV
+
+conda activate venv
+conda env config vars set LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+# reactivate env
+conda deactivate
+conda activate venv
+
+WINDOWS
+python -m pip install matlabengine==25.2.2
+
+
+1. get file paths list -> containing intan files
+
+2. from utils.readLFP import *
+    extract_lfp()
+
+rename dats from utils.getDataFiles function: rename_all_dats
+
+3. open neuroscope for one recording
+
+4. run copy_neuroscope_xml function to provide source xml (output from neuroscope) and list of recordings to copy to
+
+5. from state.sleepScoring import *, 
+    sleep_score_allrecs(recording_paths, buzcode_matlab_librarypath)
+
+
+
