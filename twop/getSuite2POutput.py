@@ -35,17 +35,19 @@ class Suite2POutput:
 
         if not os.path.exists(plane_path):
             raise ValueError(f'{plane_path} is not a valid suite2p path.')
-    
         try:
         # check if can find scope fps from experiment meta data file (must be within same 2p folder in 'field_xx'), if not default to provided arg to function
-            experiment_metadata_file = os.path.join(os.path.dirname(suite2p_path), 'Experiment.xml')
-            from utils.getFPS import get_fps_from_xml
-            if scope_fps is None:
+            experiment_metadata_file = os.path.join(os.path.dirname(self.suite2p_path), 'Experiment.xml')
+            if not os.path.exists(experiment_metadata_file):
+                print(f"WARNING!!!! Experiment.xml file ({experiment_metadata_file}) not found and defaulting to scope_fs=30. This will cause incorrect downstream analyses.")
+                self.scope_fs = scope_fs
+            else:
+                from utils.getFPS import get_fps_from_xml
                 scope_fps = get_fps_from_xml(experiment_metadata_file)
                 print(f'Found scope fps from Experiment.xml file: {scope_fps}')
                 self.scope_fs = scope_fs
         except:
-            self.scope_fs = scope_fs
+            traceback.print_exc()
         suite2p_path = plane_path
         try:
             # load s2p output files into class 

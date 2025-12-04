@@ -1,4 +1,4 @@
-from scipy.signal import butter, filtfilt, firwin, hilbert
+from scipy.signal import butter, filtfilt, firwin, hilbert, sosfiltfilt
 from scipy.ndimage import median_filter 
 import numpy as np
 
@@ -84,7 +84,19 @@ def despike_cliffs(signal, k=9, z=6.0, only_drops=False):
     signal[flags] = xi[flags]
     return signal
 
-def band_envelope(signal, fs_hz, band_hz, lp_envelope_hz=5.0):
+def bandpass_filter(data, fs, lowcut=40, highcut=300, order=4):
+    nyq = fs / 2.0
+    b, a = butter(order, [lowcut / nyq, highcut / nyq], btype="band")
+    return filtfilt(b, a, data)
+
+def bandpass_filter_sos(data, fs, lowcut=0.5, highcut=4.0, order=4):
+    nyq = fs / 2.0
+    low = lowcut / nyq
+    high = highcut / nyq
+    sos = butter(order, [low, high], btype="band", output='sos')
+    return sosfiltfilt(sos, data)
+
+def band_envelope_slow(signal, fs_hz, band_hz, lp_envelope_hz=5.0):
     """Return a slow-varying amplitude envelope for an LFP band."""
     lo, hi = band_hz
     # Band-pass

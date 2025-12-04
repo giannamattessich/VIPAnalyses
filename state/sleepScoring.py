@@ -1,6 +1,6 @@
 import os, h5py
 import pandas as pd, numpy as np
-from utils.readLFP import *
+from lfp.readLFP import *
 from utils.getDataFiles import *
 
 # def sleep_score_allrecs(all_rec_paths, buzcode_path = '/home/gianna/Documents/MATLAB/buzcode', ints_epoch_len=3.0):

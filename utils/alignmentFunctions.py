@@ -268,6 +268,7 @@ def restrict_traces(arrays, *, align="left", pad=False, fill=np.nan):
     - If pad=True: pad each to the maximum T with 'fill' instead of truncating.
     """
     # Clean & coerce to 2D: 1D -> (1, T)
+    arrays = np.asarray(arrays)
     norm = []
     for arr in arrays:
         if arr is None:

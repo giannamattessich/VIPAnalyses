@@ -1,4 +1,4 @@
-from utils.lfpFunctions import *
+from lfp.lfpFunctions import *
 
 def compare_days_spectrograms(day2lfp, fs_lfp, chan_reduce="median",
                               nperseg=2048, noverlap=1536, fmax=200, show=True):
