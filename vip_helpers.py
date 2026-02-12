@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from utils.stats import *
 from state.extractStates import *
 from utils.alignmentFunctions import *
+from state.motion_correlations import *
 # get name of day for animal from a string
 
 def get_day_from_path(recording_string):

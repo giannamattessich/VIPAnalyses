@@ -18,8 +18,7 @@ def min_max_norm(value_arr):
     Returns:
     --------
     min_max_normalized : np.ndarray
-        Z-scored input array.    
-
+        Z-scored input array
     """
     value_arr = np.asarray(value_arr)
     min_val, max_val = np.min(value_arr), np.max(value_arr)
@@ -125,4 +124,22 @@ def compare_to_normal_distribution(data):
     print(f"Skewness: {skewness:.3f}")
     print(f"Kurtosis: {kurtosis:.3f}")
 
-    
+def get_good_cells(dff, spikes):
+    # Match shapes
+    n = dff.shape[0]
+    spikes = spikes[:n]
+
+    cell_stds = np.nanstd(dff, axis=1)
+    spike_counts = spikes.sum(axis=1)
+
+    # variance threshold
+    var_thresh = np.percentile(cell_stds, 10)
+    good_var = cell_stds > var_thresh
+
+    # spike thresholds (avoid edge cases)
+    low, high = np.percentile(spike_counts, [1, 99])
+    good_spike = (spike_counts > low) & (spike_counts < high)
+
+    good_cells = np.where(good_var & good_spike)[0]
+    print(f"Good cells: {len(good_cells)} / {n}")
+    return good_cells    

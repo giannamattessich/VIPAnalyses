@@ -205,3 +205,14 @@ def get2p_foldername_field(data_basepath):
     if foldername == '':
         return None
     return os.path.join(data_basepath, foldername, 'suite2p')
+
+def get_recording_paths_sorted(basepath):
+    rec_paths = [
+        os.path.join(basepath, rec_path) for rec_path in os.listdir(basepath) if not rec_path.endswith('stim') and rec_path.startswith('p')]
+    days = []
+    for path in rec_paths:
+        day = os.path.basename(path)
+        days.append(int(day[1:]))
+    days = sorted(days)
+    days = [os.path.join(basepath, f'p{str(day)}') for day in days]    
+    return days

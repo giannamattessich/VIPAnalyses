@@ -226,6 +226,29 @@ class Suite2POutput:
         #     spike_df.to_csv(destination_path)
         return spike_df            
 
+    def get_good_cells(dff, spikes):
+        '''
+        Filter cells where there is enough variance and in top 90th percentile 
+        
+        '''
+        # Match shapes
+        n = dff.shape[0]
+        spikes = spikes[:n]
+
+        cell_stds = np.nanstd(dff, axis=1)
+        spike_counts = spikes.sum(axis=1)
+
+        # variance threshold
+        var_thresh = np.percentile(cell_stds, 10)
+        good_var = cell_stds > var_thresh
+
+        # spike thresholds (avoid edge cases)
+        low, high = np.percentile(spike_counts, [1, 99])
+        good_spike = (spike_counts > low) & (spike_counts < high)
+
+        good_cells = np.where(good_var & good_spike)[0]
+        print(f"Good cells: {len(good_cells)} / {n}")
+        return good_cells
 
             # for spike in cell_spikes:
             #     cells.append([cell] * len())

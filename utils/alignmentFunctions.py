@@ -268,7 +268,7 @@ def restrict_traces(arrays, *, align="left", pad=False, fill=np.nan):
     - If pad=True: pad each to the maximum T with 'fill' instead of truncating.
     """
     # Clean & coerce to 2D: 1D -> (1, T)
-    arrays = np.asarray(arrays)
+    #arrays = np.asarray(arrays)
     norm = []
     for arr in arrays:
         if arr is None:
@@ -437,7 +437,8 @@ def motion_to_2p_bins(frame_times, motion, motion_times, max_gap_s=0.5, fill_val
                 # motion_2p[bad] = np.nan  # or a sentinel
                 # pass for now
                 pass
-
+    if len(motion) != len(frame_times):
+        print(f'WARNING!! Returned {len(motion)} frames but was provided with {len(frame_times)}')
     return motion_2p
 
 def categorical_to_2p(frame_times, state_values, state_times):

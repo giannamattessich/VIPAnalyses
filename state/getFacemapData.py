@@ -186,9 +186,6 @@ def get_state_df(facemap_data, camera_times,
     # fill spontaneous stim types as spontaneous blocks
     return facial_motion_df
 
-
-
-
 # def get_state_df(
 #     facemap_data, 
 #     camera_times, 

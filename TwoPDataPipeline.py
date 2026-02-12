@@ -123,7 +123,8 @@ class TwoPData:
                                       movement_percentile= movement_percentile,
                                       annotate_state=annotate_state,
                                       motion_indices=motion_indices,# what index is motion saved in facemap,
-                                      use_motsvd = use_motsvd, min_max_norm=min_max_norm)
+                                      use_motsvd = use_motsvd,
+                                       min_max_norm=min_max_norm)
         if output_csv:
             self.df_to_csv(state_dataframe, output_filepath)
         return state_dataframe
@@ -186,8 +187,6 @@ class TwoPData:
         })
         return aligned_df
 
-    
-
     # def adjust_times(self):
     #     num_s2p_frames = self.s2p_out.F.shape[1]
     #     if (len(self.scope_times) != len(self.camera_times) != num_s2p_frames):
@@ -210,9 +209,6 @@ class TwoPData:
     #             self.scope_times, self.scope_times_end = self.scope_times[:-s2p_diff], self.scope_times_end[:-s2p_diff]
     #             print(f'WARNING!!! Found {num_s2p_frames}) frames from s2p but only {(len(self.scope_times))} frames from scope.\
     #                     Cutting off {s2p_diff} frames from scope and camera times')
-            
-
-
 
 def df_to_csv(self, dataframe, output_filepath):
     """

@@ -127,6 +127,7 @@ def band_hilbert(x, fs, f_lo, f_hi, order=801):
     phs = np.angle(h)        # phase
     return amp, phs
 
+
 # '''Apply a sinc lowpass filter to signal'''
 # def sinc_lowpass_filter_GPU(signal, cutoff, fs, numtaps=101, gpu_available=False):
 #     # calc nyquist sampling freq to avoid aliasing 
