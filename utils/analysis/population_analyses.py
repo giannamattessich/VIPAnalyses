@@ -35,7 +35,7 @@ def plot_population_mean(traces, t=None, *, label="Population mean", show_sem=Tr
             axs.set_title(title)
         return axs 
 
-def plot_fraction_active(traces, t=None, threshold=2.0, title=None, axs=None, color='black'):
+def plot_fraction_active(traces, fs, t=None, threshold=2.0, title=None, axs=None, color='black'):
     """
     traces: (n_cells, n_timepoints)
     threshold: activity threshold (e.g., z-score or deconv spikes > 0)
